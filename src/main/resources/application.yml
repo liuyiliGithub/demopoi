@@ -1,0 +1,3 @@
+logging:
+  file: my.log
+  path: D:\IntelliJ\demopoi\log
