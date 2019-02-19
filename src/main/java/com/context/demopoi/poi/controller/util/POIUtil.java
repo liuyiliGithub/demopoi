@@ -6,19 +6,18 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Component
 @Slf4j
 public class POIUtil {
+
+
 
     /**
      * 获取Excel workBook
@@ -30,13 +29,14 @@ public class POIUtil {
             log.info("getWorkBook,传入参数inputStream=null");
             return null;
         }
+        HSSFWorkbook workbook = null;
         try {
-            return new HSSFWorkbook(new POIFSFileSystem(inputStream));
+            workbook = new HSSFWorkbook(new POIFSFileSystem(inputStream));
         } catch (IOException e) {
             e.printStackTrace();
             log.error("POIUtil.getWorkBook()异常:{}",e.getMessage());
         }
-        return null;
+        return workbook;
     }
 
     public HSSFSheet getSheet(HSSFWorkbook workbook,int index){
@@ -96,6 +96,15 @@ public class POIUtil {
                 cellValue = "";
         }
         return cellValue;
+    }
+
+    /**
+     * 导出表格
+     * @param dataTable
+     */
+    public HSSFWorkbook export(List<List<String>> dataTable){
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        return workbook;
     }
 
 
